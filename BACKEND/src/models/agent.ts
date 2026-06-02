@@ -8,7 +8,7 @@ const agentSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     phoneNumber: {
         type: String,
@@ -36,7 +36,15 @@ const agentSchema = new mongoose.Schema({
                 type: String,
                 required: true
             }
-        }]
-})
+        }],
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user"
+    }
+},
+    {
+        timestamps: true
+    }
+)
 
 export default mongoose.model('agent', agentSchema);

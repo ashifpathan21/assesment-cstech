@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import mongoose from "mongoose";
 import 'dotenv/config';
-import { exit } from "process";
 const MONGO_URI = process.env.MONGO_URI;
 if (!MONGO_URI) {
     throw new Error("MONGO_URI is not defined ");
@@ -21,6 +20,5 @@ export const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     catch (error) {
         throw new Error("Error Connecting Database");
-        exit(0);
     }
 });
