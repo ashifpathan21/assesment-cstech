@@ -6,9 +6,14 @@ if (!JWT_SECRET) {
     throw new Error('JWT_SECRET is not defined')
 }
 export const signToken = (data: string) => {
-    return jwt.sign(data, JWT_SECRET, { expiresIn: '1d' })
+    return jwt.sign({ id: data }, JWT_SECRET, { expiresIn: '1d' })
 }
 
 export const decodeToken = (token: string) => {
-    return jwt.decode(token);
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET!) as JwtPayload;
+        return decoded.id;
+    } catch (error) {
+        return null;
+    }
 }
