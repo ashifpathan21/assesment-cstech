@@ -3,7 +3,9 @@
 A high-performance Lead Distribution System built with the MERN stack. This system allows users to manage multiple agents and distribute tasks (leads) from uploaded spreadsheets across them using a distributed worker architecture.
 
 ## 🚀 Live Demo
+
 **Frontend URL:** [https://assesment-cstech.onrender.com](https://assesment-cstech.onrender.com)
+**Demo Video URL:**[https://drive.google.com/file/d/1QWWRiE1EBABUaQYmaJ9b0EV34dpGJAib/view?usp=sharing](https://drive.google.com/file/d/1QWWRiE1EBABUaQYmaJ9b0EV34dpGJAib/view?usp=sharing)
 
 ---
 
@@ -20,6 +22,7 @@ A high-performance Lead Distribution System built with the MERN stack. This syst
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Framework**: React.js (Vite)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
@@ -27,6 +30,7 @@ A high-performance Lead Distribution System built with the MERN stack. This syst
 - **UI Components**: Lucide-React, React Hot Toast
 
 ### Backend
+
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Database**: MongoDB (Mongoose)
@@ -41,6 +45,7 @@ A high-performance Lead Distribution System built with the MERN stack. This syst
 The project follows a distributed worker pattern to ensure that file processing doesn't block the main API thread.
 
 ### Distribution Workflow
+
 1. **Upload**: User uploads a lead spreadsheet through the dashboard.
 2. **Persistence**: The file is stored on Cloudinary, and a record is created in MongoDB with a `PENDING` status.
 3. **Queuing**: A job is added to the **Redis Job Queue** via BullMQ.
@@ -56,7 +61,7 @@ graph TD
     API -->|Store Metadata| DB[(MongoDB)]
     API -->|Upload File| Cloudinary[Cloudinary Storage]
     API -->|Push Job| Redis[Redis Queue]
-    
+
     subgraph Background Worker
         Redis -->|Pop Job| Worker[BullMQ Worker]
         Worker -->|Fetch Agents| DB
@@ -72,18 +77,23 @@ graph TD
 <div align="center">
 
 ### Dashboard & Analytics
+
 ![Dashboard](./public/s1.png)
 
 ### Agent Management
+
 ![Agent Management](./public/s2.png)
 
 ### Assigned Task
+
 ![File Upload](./public/s3.png)
 
 ### File View
+
 ![Task View](./public/s4.png)
 
 ### File handling
+
 ![Settings](./public/s5.png)
 
 </div>
@@ -93,12 +103,14 @@ graph TD
 ## ⚙️ Installation & Setup
 
 ### Prerequisites
+
 - Node.js installed
 - MongoDB URI
 - Redis instance (for BullMQ)
 - Cloudinary credentials
 
 ### Backend Setup
+
 1. Navigate to the `BACKEND` directory.
 2. Install dependencies: `npm install`
 3. Create a `.env` file based on `.env.example`.
@@ -106,6 +118,7 @@ graph TD
 5. Start the server: `npm run start`
 
 ### Frontend Setup
+
 1. Navigate to the `FRONTEND` directory.
 2. Install dependencies: `npm install`
 3. Create a `.env` file with `VITE_BASE_URL`.
