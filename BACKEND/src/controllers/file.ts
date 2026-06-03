@@ -4,11 +4,12 @@ import { StatusCodes } from "http-status-codes";
 import File from "../models/file.js";
 import { deleteFromCloudinary, uploadToCloudinary } from "../config/cloudinary.js";
 import { addToQueue } from "../utils/jobQueue.js";
+import fs from "fs";
 
 export const uploadFile = async (req: UserRequest, res: Response) => {
+    const file = req.file;
     try {
         const userId = req.userId;
-        const file = req.file;
         if (!file) {
             return res.status(StatusCodes.BAD_GATEWAY).json({
                 success: false,
@@ -30,7 +31,13 @@ export const uploadFile = async (req: UserRequest, res: Response) => {
         })
 
     } catch (error) {
-        console.error(error);
+        if (file) {
+            try {
+                await fs.promises.unlink(file.path);
+            } catch (unlinkError) {
+                console.error("Error deleting temp file:", unlinkError);
+            }
+        }
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             success: false,
             message: "Internal Server Error",
